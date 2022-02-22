@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "44059542628",
+    "project_id": "find-my-buddy-8f7e4",
+    "storage_bucket": "find-my-buddy-8f7e4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:44059542628:android:a62626d31d99612154cb71",
+        "android_client_info": {
+          "package_name": "com.example.find_my_buddy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "44059542628-sd80qpius9r6occekgf7cd5qg8udmtqd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.find_my_buddy",
+            "certificate_hash": "73efaabc0ebbc383ce8d511b92d4891f171e8753"
+          }
+        },
+        {
+          "client_id": "44059542628-ihodjh6u4pml1plerpco5uabe1snov1n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDsHX569vthp3NFKlqFGMXaKRdn3YZgOoQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "44059542628-ihodjh6u4pml1plerpco5uabe1snov1n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

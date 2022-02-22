@@ -1,3 +1,4 @@
+import 'package:find_my_buddy/services/auth.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
@@ -16,7 +17,9 @@ class _LoginState extends State<Login> {
       ),
       body: Center(
         child: GestureDetector(
-          onTap: () {},
+          onTap: () {
+            AuthMethods().signInWithGoogle(context);
+          },
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(24),
