@@ -1,5 +1,5 @@
+import 'package:find_my_buddy/services/sharedprefs.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:find_my_buddy/sharedprefs.dart';
 
 class DatabaseMethods {
   Future addUserInfoToDB(
@@ -10,10 +10,22 @@ class DatabaseMethods {
         .set(userInfoMap);
   }
 
-  Future<QuerySnapshot> getUserInfo(String username) async {
+  Future updateUserInfoToDB(
+      String userId, Map<String, dynamic> userInfoMap) async {
+    return FirebaseFirestore.instance
+        .collection("users")
+        .doc(userId)
+        .update(userInfoMap);
+  }
+
+  Future<QuerySnapshot> getUserInfo(String phoneNumber) async {
     return await FirebaseFirestore.instance
         .collection("users")
-        .where("username", isEqualTo: username)
+        .where("phoneNumber", isEqualTo: phoneNumber)
         .get();
+  }
+
+  Future<Stream<QuerySnapshot>> getUsers() async {
+    return FirebaseFirestore.instance.collection("users").snapshots();
   }
 }
