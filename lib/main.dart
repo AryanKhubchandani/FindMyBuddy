@@ -1,4 +1,7 @@
+import 'package:find_my_buddy/screens/homepage.dart';
 import 'package:find_my_buddy/screens/loginpage.dart';
+import 'package:find_my_buddy/screens/otppage.dart';
+import 'package:find_my_buddy/screens/profilepage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -12,12 +15,20 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
+      title: 'Find My Buddy',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.indigo,
       ),
-      home: const Login(),
+      home: FutureBuilder(
+          future: AuthMethods().getCurrentUser(),
+          builder: (context, AsyncSnapshot<dynamic> snapshot) {
+            if (snapshot.hasData) {
+              return const HomePage();
+            } else {
+              return const LoginPage();
+            }
+          }),
     );
   }
 }

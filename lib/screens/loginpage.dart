@@ -1,36 +1,91 @@
-import 'package:find_my_buddy/services/auth.dart';
 import 'package:flutter/material.dart';
+import 'package:country_code_picker/country_code_picker.dart';
 
-class Login extends StatefulWidget {
-  const Login({Key? key}) : super(key: key);
+import 'package:find_my_buddy/screens/otppage.dart';
+
+class LoginPage extends StatefulWidget {
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
-  _LoginState createState() => _LoginState();
+  _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginState extends State<Login> {
+class _LoginPageState extends State<LoginPage> {
+  String countryCode = "+91";
+  final TextEditingController _controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("FindMyBuddy"),
-      ),
-      body: Center(
-        child: GestureDetector(
-          onTap: () {
-            AuthMethods().signInWithGoogle(context);
-          },
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(24),
-              color: Colors.blue,
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const SizedBox(
+              height: 100,
             ),
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: const Text(
-              "Sign In with Google",
-              style: TextStyle(fontSize: 16, color: Colors.white),
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 30.0),
+              child: const Center(
+                child: Text(
+                  "Phone Authentication",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 25,
+                  ),
+                ),
+              ),
             ),
-          ),
+            const SizedBox(height: 50.0),
+            CountryCodePicker(
+              onChanged: (country) {
+                setState(() {
+                  countryCode = country.dialCode!;
+                });
+              },
+              initialSelection: "IN",
+              showCountryOnly: false,
+              showOnlyCountryWhenClosed: false,
+              favorite: const ["IN", "US"],
+            ),
+            const SizedBox(height: 50.0),
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 30.0),
+              child: Center(
+                child: TextField(
+                  decoration: InputDecoration(
+                    hintText: "Phone Number",
+                    prefix: Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Text(countryCode),
+                    ),
+                  ),
+                  maxLength: 10,
+                  keyboardType: TextInputType.number,
+                  controller: _controller,
+                ),
+              ),
+            ),
+            const SizedBox(height: 50.0),
+            Container(
+              margin: const EdgeInsets.all(25.0),
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (c) => OTPScreen(
+                            phone: _controller.text,
+                            code: countryCode,
+                          )));
+                },
+                child: const Text(
+                  "Generate OTP",
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
